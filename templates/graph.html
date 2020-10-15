@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공기청정기 그래프</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='index.css')}}">
+    
+</head>
+<body>
+  <div class="content">
+    <nav role="navigation">
+      <a href="{{ url_for('index') }}" class="logo"><div class="logo-box"><h1>공기청정기</h1></div></a>
+
+      <div id="menuToggle">
+        <input type="checkbox" />
+          <span></span>
+          <span></span>
+          <span></span>
+        <ul id="menu">
+          <li><a href="{{ url_for('index') }}">정보</a></li>
+          <li><a href="{{ url_for('graph') }}">그래프</a></li>
+          <li><a href="#">Info</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    
+    </nav>
+  </div>
+
+
+
+
+  <main class="main-content">
+    
+
+    <div class="dustgraph"><a href="{{ url_for('graph') }}">현재 미세먼지 농도: {{dust}} ug/m<sup>3</sup></a></div>
+
+    <canvas id="dustchart" width="400" height="400"></canvas>
+
+
+
+  </main>
+
+
+
+
+
+    
+</body>
+</html>

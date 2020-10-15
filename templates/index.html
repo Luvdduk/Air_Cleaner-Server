@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공기청정기 정보</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='index.css')}}">
+    
+</head>
+<body onload="update_dust();">
+  <div class="content">
+    <nav role="navigation">
+      <a href="{{ url_for('index') }}" class="logo"><div class="logo-box"><h1>공기청정기</h1></div></a>
+
+      <div id="menuToggle">
+        <input type="checkbox" />
+          <span></span>
+          <span></span>
+          <span></span>
+        <ul id="menu">
+          <li><a href="{{ url_for('index') }}">정보</a></li>
+          <li><a href="{{ url_for('graph') }}">그래프</a></li>
+          <li><a href="#">About us</a></li>
+          <li><a href="#">4444</a></li>
+          
+        </ul>
+      </div>
+    
+    </nav>
+  </div>
+
+  <main>
+    <div class="sw">
+      <div id="swtext">전원</div>
+      <input type="checkbox" id="switch1" name="switch1" class="input__on-off" onclick="powerctrl()">
+      <label for="switch1" class="label__on-off">
+        <span class="marble"></span>
+        <span class="on">on</span>
+        <span class="off">off</span>
+      </label>
+    </div>
+    
+    <a href="{{ url_for('dustinfo') }}">
+    <div class="dust">
+      
+      <div id="dustname"> 현재 미세먼지 농도</div>
+      <i class="far fa-smile" id="good"></i>
+      <i class="far fa-meh" id="normal"></i>
+      <i class="far fa-frown-open" id="bad"></i>
+      <i class="far fa-tired" id="verybad"></i>
+      <div id="dustvalue"> <span id="duststate">알수없음</span></div>
+    
+    </div>
+
+
+
+
+
+    <!-- <div class="dust">
+      <h2> 현재 미세먼지 농도</h2>
+      <div id="dustvalue"> <span id=result2>?</span>μg/m<sup>3</sup></div>
+    
+    </div>
+    <div class="dust">
+      <h2> 현재 미세먼지 농도</h2>
+      <div id="dustvalue"> <span id=result3>?</span>μg/m<sup>3</sup></div>
+    
+    </div> -->
+    </a>
+
+    <div class="sw">
+      <div id="swtext">자동모드</div>
+      <input type="checkbox" id="switch2" name="switch2" class="input__on-off" onclick="autoctrl()">
+      <label for="switch2" class="label__on-off" id="sw2lb">
+        <span class="marble"></span>
+        <span class="on">on</span>
+        <span class="off">off</span>
+      </label>
+    </div>
+    
+    
+    <!-- <div id="powerbutton">
+      <a href=# id=on><button class="pwrbtn pwron" onclick="poweron()">on</button></a>
+      <a href=# id=off><button class="pwrbtn pwroff" onclick="poweroff()">off</button></a>
+    </div> -->
+
+    
+
+
+    
+    
+    <div class="qw"></div>
+    <div class="qw"></div>
+    <div class="qw"></div>
+    <div class="qw"></div>
+    <div class="qw"></div>
+    <div class="qw"></div>
+    <div class="qw"></div>
+    
+  </main>
+
+
+
+  
+  <script src="{{url_for('static', filename = 'jquery.min.js')}}"></script>
+  <script type=text/javascript src="{{url_for('static', filename = 'index.js')}}"></script>
+  <script src="https://kit.fontawesome.com/e08131f43f.js" crossorigin="anonymous"></script>
+</body>
+</html>
