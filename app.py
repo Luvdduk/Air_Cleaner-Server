@@ -1,6 +1,6 @@
 # app.py
 from flask import Flask, render_template, jsonify, request
-import mainsys
+# import mainsys
 import asyncio
 import time
 from threading import Thread
@@ -61,11 +61,15 @@ def graph():
 def dustinfo():
   return render_template('dustinfo.html')
 
+@app.route('/fan_speed')
+def fan_speed():
+  return render_template('fan_speed.html')
+
 @app.route('/stuff', methods = ['GET'])
 def stuff():
   # dust=ardu.dust
   
-  return jsonify(pm1=maintest.pm1, pm25= maintest.pm25, pm10=maintest.pm10, power_state=maintest.power_state, fan_state=maintest.fan_state)
+  return jsonify(pm1=maintest.pm1, pm25= maintest.pm25, pm10=maintest.pm10, power_state=maintest.power_state, fan_speed=maintest.fan_speed)
 
 if __name__=="__main__":
   # Thread(target=mainsys.Button_Ctrl).start()

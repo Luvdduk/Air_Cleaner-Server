@@ -2,6 +2,7 @@ let pm1;
 let pm25;
 let pm10;
 let power_state;
+let fan_speed;
 
 
 //새로고침 있음
@@ -45,20 +46,37 @@ function update_dust() {
     
     console.log(data);
     
-    pm1= Number(data.pm1)
-    pm25= Number(data.pm25)
-    pm10= Number(data.pm10)
-    power_state= Number(data.power_state)
-    fan_state= Number(data.fan_state)
+    pm1= Number(data.pm1);
+    pm25= Number(data.pm25);
+    pm10= Number(data.pm10);
+    power_state= Number(data.power_state);
+    fan_speed= data.fan_speed;
     console.log(pm1);
     console.log(pm25);
     console.log(pm10);
     console.log(power_state);
-    console.log(fan_state);
+    console.log(fan_speed);
     
     $('#dustvalue1').text(pm1);
     $('#dustvalue2').text(pm25);
     $('#dustvalue3').text(pm10);
+
+    if (fan_speed=="SLOW"){
+        $('#fan_speed').text("미풍");
+    }
+    else if(fan_speed == "MID"){
+        $('#fan_speed').text("약풍");
+    }
+    else if(fan_speed == "FULL"){
+        $('#fan_speed').text("강풍");
+    }
+    else{
+        console.log("풍량표시 오류")
+    }
+
+    
+
+
 
       //미세먼지 배경 색 변화
     if((pm1 <= 30) && ((pm25 + pm10) <= 15)){
@@ -154,6 +172,32 @@ function autoctrl(){
         console.log("자동모드 불가");
     }
 };
+
+
+function fanslow(){
+    $.getJSON('/fanslow',
+            function(data) {
+            //do nothing
+        });
+        history.back();
+        return false;
+}
+function fanmid(){
+    $.getJSON('/fanmid',
+            function(data) {
+            //do nothing
+        });
+    history.back();
+    return false;
+}
+function fanfull(){
+    $.getJSON('/fanfull',
+            function(data) {
+            //do nothing
+        });
+        history.back();
+    return false;
+}
 
 
 

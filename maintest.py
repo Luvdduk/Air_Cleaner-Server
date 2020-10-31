@@ -34,7 +34,7 @@ import sqlite3
     # time.sleep(1)
 
 power_state=1
-fan_state="MID"
+fan_speed="MID"
 
 
 pm1=0

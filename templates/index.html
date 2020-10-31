@@ -20,8 +20,8 @@
         <ul id="menu">
           <li><a href="{{ url_for('index') }}">정보</a></li>
           <li><a href="{{ url_for('graph') }}">그래프</a></li>
+          <li><a href="#">앱 다운로드</a></li>
           <li><a href="#">About us</a></li>
-          <li><a href="#">4444</a></li>
           
         </ul>
       </div>
@@ -77,6 +77,13 @@
         <span class="off">off</span>
       </label>
     </div>
+
+    <div class="sw" onclick="location.href='/fan_speed'">
+      
+      <div id="swtext">풍량조절</div>
+      <div style="display: inline-block;" id="speedsel"><span id="fan_speed">알수없음</span><i class="fas fa-chevron-right" style="font-size: 23pt; margin-left: 15px;"></i></div>
+      
+    </div>
     
     
     <!-- <div id="powerbutton">
@@ -84,18 +91,6 @@
       <a href=# id=off><button class="pwrbtn pwroff" onclick="poweroff()">off</button></a>
     </div> -->
 
-    
-
-
-    
-    
-    <div class="qw"></div>
-    <div class="qw"></div>
-    <div class="qw"></div>
-    <div class="qw"></div>
-    <div class="qw"></div>
-    <div class="qw"></div>
-    <div class="qw"></div>
     
   </main>
 

@@ -1,5 +1,8 @@
 /*index.html*/
 /*전원버튼*/
+a{
+  text-decoration: none;
+}
 .pwrbtn {
     border: none;
     color: white;
@@ -388,4 +391,13 @@ input[type="checkbox"] {
   display: none;
   font-size: 30pt;
   color: red;
+}
+
+.fanspeed{
+  font-size: 20pt;
+}
+
+#fan_speed{
+  
+  font-size: 20pt;
 }

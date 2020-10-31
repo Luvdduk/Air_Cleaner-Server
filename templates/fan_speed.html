@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>미세먼지 상세정보</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='index.css')}}">
+    
+
+</head>
+<body>
+  <div class="content">
+    <nav role="navigation">
+      <a href="{{ url_for('index') }}" class="logo"><div class="logo-box"><h1>공기청정기</h1></div></a>
+
+      <!-- <div id="menuToggle">
+        <input type="checkbox" />
+          <span></span>
+          <span></span>
+          <span></span>
+        <ul id="menu">
+          <li><a href="{{ url_for('index') }}">정보</a></li>
+          <li><a href="{{ url_for('graph') }}">그래프</a></li>
+          <li><a href="#">Info</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div> -->
+      <div class="arrow-left" onclick="history.back()"></div>
+    
+    </nav>
+  </div>
+
+
+
+
+  <main class="main-content">
+    
+    <div class="sw fanspeed" id="slow" onclick="fanslow()">미풍</div>
+    <div class="sw fanspeed" id="mid" onclick="fanmid()">약풍</div>
+    <div class="sw fanspeed" id="full" onclick="fanfull()">강풍</div>
+    
+    
+    
+    
+    
+    
+
+
+
+
+  </main>
+
+
+
+
+
+  <script src="{{url_for('static', filename = 'jquery.min.js')}}"></script>
+  <script type=text/javascript src="{{url_for('static', filename = 'index.js')}}"></script>
+</body>
+</html>
