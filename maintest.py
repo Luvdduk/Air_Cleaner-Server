@@ -1,64 +1,41 @@
 import serial
 import time
-import sqlite3
+import pymysql
+import random
 
-
-
-# port= "/dev/ttyACM1"
-# serialArduino = serial.Serial(port, 9600, timeout=1)
-# serialArduino.flushInput()
-# dust=0
-# state=0
-
-# def loop():
-#     global dust
-#     global state
-
-
-#     while True:
-#         if serialArduino.in_waiting > 0:
-
-#             dust = serialArduino.readline().decode('utf-8').rstrip()
-#             if "PowerOn" in dust :
-#                 state=1
-#                 print("전원 켜짐" + state)
-
-#             elif "PowerOff" in dust :
-#                 state=0
-#                 print("전원 꺼짐" + state)
-
-#             else:
-#                 print(dust)
-
-
-    # time.sleep(1)
 
 power_state=1
 fan_speed="MID"
 
 
+# DB 연결
+dust_db = pymysql.connect(
+    user='luvdduk', 
+    passwd='alrkd4535', 
+    host='127.0.0.1', 
+    db='air-cleaner', 
+    charset='utf8'
+)
+cursor = dust_db.cursor(pymysql.cursors.DictCursor)
 pm1=0
 pm25=0
 pm10=0
 def loop():
     global pm1, pm25, pm10, power_state
     while True:
-        pm1 += 1
-        pm25 += 2
-        pm10 += 3
-        # print("파워상태: %d" %power_state)
-        # print(pm1)
-        # print(pm25)
-        # print(pm10)
+        pm1= random.randrange(101)
+        pm25= random.randrange(101)
+        pm10= random.randrange(101)
+        print("================")
+        print("pm1: %d\npm2.5: %d\npm10: %d" %(pm1, pm25, pm10))
+        print("================")
+
+        cursor.execute("INSERT INTO status(powerstate, PM1, PM25, PM10) VALUES ('%d', '%d','%d','%d')"%(power_state, pm1, pm25, pm10))
+        dust_db.commit()
+
         time.sleep(3)
 
 
-
-# def poweron():
-#     serialArduino.write(b"1\n")
-
-# def poweroff():
-#     serialArduino.write(b"0\n")
 
 if __name__ == "__main__":
     loop()
