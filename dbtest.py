@@ -33,6 +33,13 @@ def get_1h_mean(start_time):
     df_1h = df.loc[one_hour]
     mean_1h = { "time": start_time, "PM1.0": df_1h['PM1'].mean(), "PM2.5": df_1h['PM25'].mean(), "PM10": df_1h['PM10'].mean()}
     return mean_1h
+def get_hours_ago_mean(t_hours):
+    start_time = datetime.datetime.now() - datetime.timedelta(hours=t_hours)
+    end_time = start_time + datetime.timedelta(hours=1)
+    one_hour = (df['timestamp']>= start_time) & (df['timestamp']< end_time)
+    df_1h = df.loc[one_hour]
+    mean_1h = { "hours" : t_hours, "time": start_time, "PM1.0": df_1h['PM1'].mean(), "PM2.5": df_1h['PM25'].mean(), "PM10": df_1h['PM10'].mean()}
+    return mean_1h
 
 
 
