@@ -30,8 +30,8 @@ def loop():
         print("pm1: %d\npm2.5: %d\npm10: %d" %(pm1, pm25, pm10))
         print("================")
 
-        cursor.execute("INSERT INTO status(powerstate, PM1, PM25, PM10) VALUES ('%d', '%d','%d','%d')"%(power_state, pm1, pm25, pm10))
-        dust_db.commit()
+        # cursor.execute("INSERT INTO status(powerstate, PM1, PM25, PM10) VALUES ('%d', '%d','%d','%d')"%(power_state, pm1, pm25, pm10))
+        # dust_db.commit()
 
         time.sleep(3)
 

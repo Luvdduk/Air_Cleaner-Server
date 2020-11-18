@@ -5,6 +5,7 @@ import asyncio
 import time
 from threading import Thread
 import maintest
+import database
 
 #Flask 객체 인스턴스 생성
 app = Flask(__name__)
@@ -52,10 +53,7 @@ def fanfull():
 
 @app.route('/graph')
 def graph():
-  pm1= maintest.pm1
-  pm25= maintest.pm25
-  pm10= maintest.pm10
-  return render_template('graph.html', pm1=pm1, pm25=pm25, pm10=pm10)
+  return render_template('graph.html')
 
 @app.route('/dustinfo')
 def dustinfo():
@@ -64,6 +62,15 @@ def dustinfo():
 @app.route('/fan_speed')
 def fan_speed():
   return render_template('fan_speed.html')
+
+
+@app.route('/hours_graph', methods = ['GET'])
+def hours_graph():
+  return jsonify(database.oneday_hours_mean)
+
+@app.route('/days_graph', methods = ['GET'])
+def days_graph():
+  return jsonify(database.oneweek_days_mean)
 
 @app.route('/stuff', methods = ['GET'])
 def stuff():
