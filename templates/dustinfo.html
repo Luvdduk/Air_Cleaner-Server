@@ -10,22 +10,11 @@
 </head>
 <body>
   <div class="content">
-    <nav role="navigation">
-      <a href="{{ url_for('index') }}" class="logo"><div class="logo-box"><h1>공기청정기</h1></div></a>
+    <nav role="navigation" id="navid">
+      <i class="fas fa-chevron-left" id="left" onclick="history.back()"></i>
+      <a href="{{ url_for('index') }}" class="logo"><div class="logo-box" id="logo2">공기청정기</div></a>
 
-      <!-- <div id="menuToggle">
-        <input type="checkbox" />
-          <span></span>
-          <span></span>
-          <span></span>
-        <ul id="menu">
-          <li><a href="{{ url_for('index') }}">정보</a></li>
-          <li><a href="{{ url_for('graph') }}">그래프</a></li>
-          <li><a href="#">Info</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-      </div> -->
-      <div class="arrow-left" onclick="history.back()"></div>
+      
     
     </nav>
   </div>
@@ -36,21 +25,22 @@
   <main class="main-content">
     
 
-    <div class="dustgraph">
+    
 
       
-      <ul>
-        <li>초미세먼지(PM1.0) 농도: <span id="dustvalue1"></span> ug/m<sup>3</sup></li>
-        <li>초미세먼지(PM2.5) 농도: <span id="dustvalue2"></span> ug/m<sup>3</sup></li>
-        <li>초미세먼지(PM10) 농도: <span id="dustvalue3"></span> ug/m<sup>3</sup></li>
-      </ul>
-      
-      
+
+
+
+
+    <a href="https://www.me.go.kr/mamo/web/index.do?menuId=16201"><div class="sw fanspeed">PM1.0 농도: <span id="dustvalue1"></span>μg/m³</div>
+    <div class="sw fanspeed">PM2.5 농도: <span id="dustvalue2"></span>μg/m³</div>
+    <div class="sw fanspeed">PM10 농도: <span id="dustvalue3"></span>μg/m³</div></a>
+
     
     
     
     
-    </div>
+  
 
 
 
@@ -60,8 +50,8 @@
 
 
 
-
   <script src="{{url_for('static', filename = 'jquery.min.js')}}"></script>
   <script type=text/javascript src="{{url_for('static', filename = 'index.js')}}"></script>
+  <script src="https://kit.fontawesome.com/e08131f43f.js" crossorigin="anonymous"></script>
 </body>
 </html>

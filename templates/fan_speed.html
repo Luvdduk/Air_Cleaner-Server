@@ -11,7 +11,9 @@
 <body>
   <div class="content">
     <nav role="navigation">
-      <a href="{{ url_for('index') }}" class="logo"><div class="logo-box"><h1>공기청정기</h1></div></a>
+      <i class="fas fa-chevron-left" id="left" onclick="history.back()"></i>
+      <a href="{{ url_for('index') }}" class="logo"><div class="logo-box" id="logo2">공기청정기</div></a>
+
 
       <!-- <div id="menuToggle">
         <input type="checkbox" />
@@ -25,7 +27,6 @@
           <li><a href="#">Contact</a></li>
         </ul>
       </div> -->
-      <div class="arrow-left" onclick="history.back()"></div>
     
     </nav>
   </div>
@@ -56,5 +57,6 @@
 
   <script src="{{url_for('static', filename = 'jquery.min.js')}}"></script>
   <script type=text/javascript src="{{url_for('static', filename = 'index.js')}}"></script>
+  <script src="https://kit.fontawesome.com/e08131f43f.js" crossorigin="anonymous"></script>
 </body>
 </html>

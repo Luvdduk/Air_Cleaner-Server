@@ -20,6 +20,7 @@ cursor = dust_db.cursor(pymysql.cursors.DictCursor)
 pm1=0
 pm25=0
 pm10=0
+fan_state = "MID"
 def loop():
     global pm1, pm25, pm10, power_state
     while True:

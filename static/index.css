@@ -173,9 +173,10 @@ nav {
 
 .logo{
   color: white;
-  text-align: center;
+  /* text-align: center; */
   display: inline;
-
+  /* font-size: 30pt;
+  font-weight: 530; */
   
 }
 .logo-box{
@@ -240,21 +241,6 @@ a{
   
   text-align: center;
   
-}
-
-.arrow-left{
-  display: block;
-  margin: 5% 7%;
-  width: 20px;
-  height: 20px;
-  border-top: 4px solid white;
-  border-left: 4px solid white;
-  border-radius: 3px;
-}
-
-
-.arrow-left{
-  transform: rotate(-45deg);
 }
 
 
@@ -400,4 +386,27 @@ input[type="checkbox"] {
 #fan_speed{
   
   font-size: 20pt;
+}
+
+#left{
+  font-size: 27pt;
+  color: white;
+  padding: 12px 20px;
+  left: 10%;
+}
+h1{
+  display: inline;
+}
+#navid{
+  text-align: justify;
+}
+#logo2{
+  font-size: 18pt;
+  font-weight: 600;
+  display: inline;
+  margin: 10px -60px 0;
+}
+a{
+  text-decoration: none;
+  color: black;
 }

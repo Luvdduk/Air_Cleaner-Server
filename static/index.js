@@ -4,8 +4,7 @@ let pm10;
 let power_state;
 let fan_speed;
 
-
-//새로고침 있음
+// 전원 켜기
 function poweron(){
     $.getJSON('/poweron',
             function(data) {
@@ -13,18 +12,12 @@ function poweron(){
         });
         return false;
 }
-    
-  //새로고침 있음
 function poweroff(){
-    //확인
-    //document.form.submit();
     $.getJSON('/poweroff',
             function(data) {
             //do nothing
         });
         return false;
-
-    
 }
 function modeauto(){
     $.getJSON('/modeauto',
@@ -35,15 +28,11 @@ function modeauto(){
 }
 
 
-
-
 //ajax 미세먼지값 수신
 let intervalID= setInterval(update_dust, 1000);
 function update_dust() {
     $.getJSON('/stuff',
-    
     function (data) {
-    
     console.log(data);
     
     pm1= Number(data.pm1);
@@ -62,23 +51,20 @@ function update_dust() {
     $('#dustvalue3').text(pm10);
 
     if (fan_speed=="SLOW"){
-        $('#fan_speed').text("미풍");
+        $('#fan_speed').text("1단계");
     }
     else if(fan_speed == "MID"){
-        $('#fan_speed').text("약풍");
+        $('#fan_speed').text("2단계");
     }
     else if(fan_speed == "FULL"){
-        $('#fan_speed').text("강풍");
+        $('#fan_speed').text("3단계");
     }
     else{
+        $('#fan_speed').text("Error");
         console.log("풍량표시 오류")
     }
 
-    
-
-
-
-      //미세먼지 배경 색 변화
+    //미세먼지 이모티콘 및 색 변화
     if((pm1 <= 30) && ((pm25 + pm10) <= 15)){
         $("#duststate").css("color", "#a3e7d6");
         $('#duststate').text("좋음");
@@ -119,15 +105,14 @@ function update_dust() {
         console.log("체크안됨")
     }else{
         $("#switch1").prop("checked", true);
-        console.log("체크됨")
+        console.log("체크됨") //스위치를 전원이 꺼져있을때 off로 변경
     }
     if (power_state == 0){
         $('#switch2').attr("disabled", true);
         $("#sw2lb").css("background-color", "#bebebe");
     }else{
         $('#switch2').removeAttr("disabled");
-        
-    }
+    }//자동모드 스위치를 전원이 꺼져있을때 비활성화
     if (power_state == 2){
         $("#switch2").prop("checked", true);
         $("#sw2lb").css("background-color", "#0bba82");
@@ -137,14 +122,12 @@ function update_dust() {
     }else{
         $("#switch2").prop("checked", false);
         $("#sw2lb").css("background-color", "#bebebe");
-    }
-        
-    
+    }//자동모드 일때 스위치 on으로 변경
     });
     
 };
 
-function powerctrl(){
+function powerctrl(){ // 파워스위치 누를시 실행, 파워모드 변경
     console.log("파워조정");
     if (power_state == 0){
         poweron();
@@ -159,7 +142,7 @@ function powerctrl(){
         console.log("파워조정 오류")
     }
 };
-function autoctrl(){
+function autoctrl(){ // 자동모드 스위치 누를시 실행, 자동모드 설정 및 해제
     console.log("모드조정");
     if (power_state == 1){
         modeauto();

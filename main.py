@@ -1,4 +1,4 @@
-from gpiozero import Button, LED, RGBLED, OutputDevice, DigitalOutputDevice, PWMOutputDevice
+from gpiozero import Button, RGBLED, DigitalOutputDevice, PWMOutputDevice
 from colorzero import Color
 from signal import pause
 from threading import Thread
@@ -50,43 +50,32 @@ SLOW = 0.3
 
 # config.ini 가 있으면 로드 없으면 에러
 try:
-    # 설정파일 로드
-    conf = ConfigParser()
+    conf = ConfigParser()# 설정파일 로드
     conf.read('config.ini')
-    # 팬속 로드
-    fanspeed = conf['FAN']['fan_speed']
-    # fanspeed = float(fanspeed)
-    print("설정파일 팬속도: %s" %fanspeed)
-    # fan_pwm.value = fanspeed
+    fan_state = conf['FAN']['fan_speed']# 팬속 로드
+    print("설정파일 팬속도: %s" %fan_state)
 except:
     print("설정파일 로드 오류")
 
-if fanspeed == "FULL":
-    fan_state = "FULL"
+if fan_state == "FULL":
     fan_pwm.value = 1.0
-elif fanspeed == "MID":
-    fan_state = "MID"
+elif fan_state == "MID":
     fan_pwm.value = 0.65
-elif fanspeed == "SLOW":
-    fan_state = "SLOW"
+elif fan_state == "SLOW":
     fan_pwm.value = 0.3
 else:
     print("설정파일 로드 오류")
 
-
 # lcd초기화
 lcd.lcd_init()
-
-
 
 # 버튼 제어
 def Button_Ctrl():
     global power_state
     global fan_state
-    global fanspeed
-    powersw.when_pressed = powerctrl
-    fansw.when_pressed = fan_speedsw
-    pause()
+    powersw.when_pressed = powerctrl #파워버튼 누르면 실행
+    fansw.when_pressed = fan_speedsw #팬속도 조정버튼 누르면 실행
+    pause() # 누를때까지 대기
 
 
 
@@ -104,17 +93,7 @@ def powerctrl():
     if power_state == 2:
         power_state = 0
         print("전원끔")
-        
         return
-
-# 팬 on/off
-def fan_power(state):
-    if state:
-        fan_pin1.on()
-        fan_pin2.off()
-    else:
-        fan_pin1.off()
-        fan_pin2.off()
 
 # 팬 스피드
 def fan_speedsw():
@@ -125,22 +104,31 @@ def fan_speedsw():
             fan_pwm.value = 0.65
             fan_state = "MID"
             print("팬속도: %f"%fan_pwm.value)
-            # fan_speed_ctrl(0.65)
             return
         if fan_state == "MID":
             fan_pwm.value = 1
             fan_state = "FULL"
             print("팬속도: %f"%fan_pwm.value)
-            # fan_speed_ctrl(1)
             return
         if fan_state == "FULL":
             fan_pwm.value = 0.3
             fan_state = "SLOW"
             print("팬속도: %f"%fan_pwm.value)
-            # fan_speed_ctrl(0.3)
             return
     else:
         print("일반모드에서만 동작")
+
+
+# 팬 on/off
+def fan_power(state):
+    if state:
+        fan_pin1.on()
+        fan_pin2.off()
+    else:
+        fan_pin1.off()
+        fan_pin2.off()
+
+
 
 
 
@@ -202,9 +190,7 @@ def loop():
 
         if(dustlib.protocol_chk(buffer)):
             data = dustlib.unpack_data(buffer)
-            global pm1
-            global pm25
-            global pm10
+            global pm1, pm25, pm10
             pm1 = int(data[dustlib.DUST_PM1_0_ATM])
             pm25 = int(data[dustlib.DUST_PM2_5_ATM])
             pm10 = int(data[dustlib.DUST_PM10_0_ATM])
@@ -213,7 +199,6 @@ def loop():
             cursor.execute("INSERT INTO status(powerstate, PM1, PM25, PM10) VALUES ('%d', '%d','%d','%d')"%(power_state, pm1, pm25, pm10))
             dust_db.commit()
 
-            # 
             print ("PMS 7003 dust data")
             print ("PM 1.0 : %d" % (pm1))
             print ("PM 2.5 : %d" % (pm25))
@@ -221,10 +206,7 @@ def loop():
         else:
             print ("먼지센서 데이터 read 오류")
         
-        
-        
         # 전원 상태에 따른 동작
-
         if power_state == 0:
             print("전원꺼짐")
             fan_power(OFF)
@@ -248,11 +230,6 @@ def loop():
             time.sleep(1)
             
             display_dust(pm1, pm25, pm10)
-        # powersw.wait_for_press(timeout=2)
-        # time.sleep(1)
-        # db에 먼지농도 저장
-        
-        
         time.sleep(1)
 
 
