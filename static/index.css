@@ -3,44 +3,6 @@
 a{
   text-decoration: none;
 }
-.pwrbtn {
-    border: none;
-    color: white;
-    padding: 13px 18%;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 10px 4px;
-    transition-duration: 0.4s;
-    cursor: pointer;
-    border-radius: 36px;
-  }
-  
-.pwron {
-  background-color: white; 
-  color: black; 
-  border: 2px solid #4CAF50;
-
-  
-}
-
-.pwron:hover {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.pwroff {
-  background-color: white; 
-  color: black; 
-  border: 2px solid red;
-  
-}
-
-.pwroff:hover {
-  background-color: red;
-  color: white;
-}
 
 body {
   background-color: #f9f9f9;
@@ -63,10 +25,6 @@ ul {
   padding: 0;
   list-style-type: none;
 }
-
-
-
-
 
 nav {
   background-color: #95c6e6;
@@ -177,8 +135,8 @@ nav {
   display: inline;
   /* font-size: 30pt;
   font-weight: 530; */
-  
 }
+
 .logo-box{
   position: absolute;
   display: flex;
@@ -187,7 +145,6 @@ nav {
   margin: -5px -60px 0;
   width: auto;
   height: auto;
-
 }
 
 div.qw{
@@ -197,15 +154,12 @@ div.qw{
   margin: 2px 0;
   border: 2px solid black;
   border-radius: 5px;
-  
-  
 }
 
 main{
   margin-top: 65px;
   /* position: relative; */
 }
-
 
 a{
   text-decoration: none;
@@ -219,13 +173,7 @@ a{
   transition: color 1s;
 }
 
-
-/* .dust h2{
-  padding-top: 10px;
-} */
-
 #dustvalue{
-  
   height: auto;
   display: inline-block;
   font-size: 35pt;
@@ -237,14 +185,8 @@ a{
 }
 
 #powerbutton{
-  
-  
   text-align: center;
-  
 }
-
-
-
 
 .sw{
   display: flex;
@@ -255,7 +197,6 @@ a{
   border-bottom: 1px solid #85888c9c;
   -webkit-justify-content: space-between;
   justify-content: space-between;
-
 }
 
 #swtext{
@@ -263,8 +204,6 @@ a{
   float: left;
   
 }
-
-
 
 #dustname{
   font-size: 15pt;
