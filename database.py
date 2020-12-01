@@ -8,14 +8,14 @@ from random import randrange as rd
 # DB 연결, DB참조 오류로 인해 각각 지정
 dust_db = pymysql.connect(
     user='luvdduk', 
-    passwd='alrkd4535', 
+    passwd='qazwsxedc123', 
     host='127.0.0.1', 
     db='air-cleaner', 
     charset='utf8'
 )
 dust_db2 = pymysql.connect(
     user='luvdduk', 
-    passwd='alrkd4535', 
+    passwd='qazwsxedc123', 
     host='127.0.0.1', 
     db='air-cleaner', 
     charset='utf8'
@@ -66,26 +66,33 @@ def dummy_week():
     cursor = dust_db2.cursor(pymysql.cursors.DictCursor)
     a = 0
     while a<8:
-        start_date = datetime.datetime(2020,11,13,14,0) + datetime.timedelta(days=a)
-        cursor.execute("INSERT INTO status(timestamp, powerstate, PM1, PM25, PM10) VALUES ('%s','%d','%d','%d','%d')"%(start_date, 1, rd(3,11), rd(5,21), rd(9,41)))
-        dust_db.commit()
+        start_date = datetime.datetime.now() - datetime.timedelta(days=a)
+        try:
+            cursor.execute("INSERT INTO status(timestamp, powerstate, PM1, PM25, PM10) VALUES ('%s','%d','%d','%d','%d')"%(start_date, 1, rd(3,11), rd(5,21), rd(9,41)))
+            dust_db2.commit()
+        except KeyError:
+            pass
         a += 1
 
 def dummy_day():
     cursor = dust_db2.cursor(pymysql.cursors.DictCursor)
     a = 0
     while a<24:
-        start_date = datetime.datetime(2020,11,19,0,0) + datetime.timedelta(hours=a)
-        cursor.execute("INSERT INTO status(timestamp, powerstate, PM1, PM25, PM10) VALUES ('%s','%d','%d','%d','%d')"%(start_date, 1, rd(3,11), rd(5,21), rd(9,41)))
-        dust_db.commit()
+        start_date = datetime.datetime.now() - datetime.timedelta(hours=a)
+        try: 
+            cursor.execute("INSERT INTO status(timestamp, powerstate, PM1, PM25, PM10) VALUES ('%s','%d','%d','%d','%d')"%(start_date, 1, rd(3,11), rd(5,21), rd(9,41)))
+            dust_db2.commit()
+        except KeyError:
+            pass
         a += 1
 
 
 
 if __name__ == "__main__":
     # print(oneweek_days_mean())
-    print(oneday_hours_mean())
-    # dummy_day()
+    # print(oneday_hours_mean())
+    dummy_day()
+    dummy_week()
 
 
 

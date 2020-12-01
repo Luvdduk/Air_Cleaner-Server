@@ -1,14 +1,29 @@
 # app.py
 from flask import Flask, render_template, jsonify, request
-# import main
 import time
 from threading import Thread
-import maintest
 import database
 import pandas as pd
+import json
 
 #Flask 객체 인스턴스 생성
 app = Flask(__name__)
+
+state = {
+  "power_on" : False,
+  "power_off" : False,
+  "auto_mode" : False,
+  "fan_slow" : False,
+  "fan_mid" : False,
+  "fan_full" : False
+}
+power_state = 0
+fan_state = 0
+pm1 = 0
+pm25 = 0
+pm10 = 0
+
+
 
 @app.route('/') # index.html 렌더링
 def index():
@@ -28,41 +43,44 @@ def fan_speed():
 
 @app.route('/poweron') # main 전원변수 0으로
 def poweron():
+  global state
   print ("poweron")
-  maintest.power_state = 1
+  state["power_on"] = True
   return ("nothing")
 
 @app.route('/poweroff') # main 전원변수 1로
 def poweroff():
+  global state
   print ("poweroff")
-  maintest.power_state = 0
+  state['power_off'] = True
   return ("nothing")
 
 @app.route('/modeauto') # main 전원변수 2로
 def modeauto():
+  global state
   print ("automode")
-  maintest.power_state = 2
+  state['auto_mode'] = True
   return ("nothing")
 
 @app.route('/fanslow') # main 팬 PWM Value값 0.3으로 변경
 def fanslow():
+  global state
   print ("fanslow")
-  # main.fan_pwm.value = 0.3
-  # main.fan_state = "SLOW"
+  state['fan_slow'] = True
   return ("nothing")
 
 @app.route('/fanmid') # main 팬 PWM Value값 0.65으로 변경
 def fanmid():
+  global state
   print ("fanmid")
-  # main.fan_pwm.value = 0.65
-  # main.fan_state = "MID"
+  state['fan_mid'] = True
   return ("nothing")
 
 @app.route('/fanfull') # main 팬 PWM Value값 1로 변경
 def fanfull():
+  global state
   print ("fanfull")
-  # main.fan_pwm.value = 1.0
-  # main.fan_state = "FULL"
+  state['fan_full'] = True
   return ("nothing")
 
 
@@ -81,15 +99,51 @@ def days_graph():
   return df.to_json() # json타입으로 변환하여 리턴
 
 
+
+
+@app.route('/receivedata', methods = ['GET', 'POST'])
+def receivedata():
+  global data, power_state, fan_state, pm1, pm25, pm10
+  data = request.get_json(force=True)
+  print(data)
+  # data =  json.load(data)
+  power_state = data["power_state"]
+  fan_state = data["fan_state"]
+  pm1 = data["pm1"]
+  pm25 = data["pm25"]
+  pm10 = data["pm10"]
+
+  if (state["power_on"] == True) & (power_state == 1):
+    state["power_on"] = False
+  if (state["power_off"] == True) & (power_state == 0):
+    state["power_off"] = False
+  if (state["auto_mode"] == True) & (power_state == 2):
+    state["auto_mode"] = False
+  if (state["fan_slow"] == True) & (fan_state == "SLOW"):
+    state["fan_slow"] = False
+  if (state["fan_mid"] == True) & (fan_state == "MID"):
+    state["fan_mid"] = False
+  if (state["fan_full"] == True) & (fan_state == "FULL"):
+    state["fan_full"] = False
+  return ("data received")
+
+@app.route('/senddata', methods = ['GET', 'POST'])
+def senddata():
+  global state
+  return jsonify(state)
+
+
 @app.route('/stuff', methods = ['GET']) # 실시간 데이터 반환, GET요청만 허용
 def stuff():
-  # main에서 변수를 실시간으로 연동해서, json타입으로 변환해서 리턴
-  return jsonify(pm1=maintest.pm1, pm25= maintest.pm25, pm10=maintest.pm10, power_state=maintest.power_state, fan_speed=maintest.fan_state)
-  # return jsonify(pm1=main.pm1, pm25= main.pm25, pm10=main.pm10, power_state=main.power_state, fan_speed=main.fan_state)
+  print(state)
+  try:
+    return jsonify(data)
+  except:
+    return ("no data")
+
+
 
 if __name__=="__main__":
-  # Thread(target=main.Button_Ctrl).start() # 쓰레드0
-  Thread(target=maintest.loop).start() # 쓰레드1
   app.run(host="0.0.0.0", debug=True) # 쓰레드2
   
   

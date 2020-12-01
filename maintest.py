@@ -1,4 +1,3 @@
-import serial
 import time
 import pymysql
 import random

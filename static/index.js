@@ -51,25 +51,30 @@ let intervalID= setInterval(update_dust, 1000); //1초마다 update_dust() 함�
 function update_dust() {
     $.getJSON('/stuff', //ajax로 실시간 미세먼지값 수신
     function (data) {
+    if (data = NaN){
+        alert("공기청정기과 연결되지 않았습니다. 공기청정기의 전원을 연결하고 새로고침하세요.")
+    }
+
+    console.log("ㅇㅇ");
     console.log(data);
     //변수에 실시간 데이터값 저장(int)
     pm1= Number(data.pm1);
     pm25= Number(data.pm25);
     pm10= Number(data.pm10);
     power_state= Number(data.power_state);
-    fan_speed= data.fan_speed;
+    fan_state= data.fan_state;
     // 실시간 미세먼지 값을 해당 id 태그에 업데이트
     $('#dustvalue1').text(pm1);
     $('#dustvalue2').text(pm25);
     $('#dustvalue3').text(pm10);
     
-    if (fan_speed=="SLOW"){//팬 속도가 1단계일때
+    if (fan_state == "SLOW"){//팬 속도가 1단계일때
         $('#fan_speed').text("1단계"); //팬 스위치에 상태 표시
     }
-    else if(fan_speed == "MID"){//팬 속도가 2단계일때
+    else if(fan_state == "MID"){//팬 속도가 2단계일때
         $('#fan_speed').text("2단계"); //팬 스위치에 상태 표시
     }
-    else if(fan_speed == "FULL"){//팬 속도가 3단계일때
+    else if(fan_state == "FULL"){//팬 속도가 3단계일때
         $('#fan_speed').text("3단계"); //팬 스위치에 상태 표시
     }
     else{
