@@ -41,6 +41,10 @@ def dustinfo():
 def fan_speed():
   return render_template('fan_speed.html')
 
+@app.route('/info') # info.html 렌더링
+def info():
+  return render_template('info.html')
+
 @app.route('/poweron') # main 전원변수 0으로
 def poweron():
   global state
