@@ -109,8 +109,6 @@ def days_graph():
 def receivedata():
   global data, power_state, fan_state, pm1, pm25, pm10
   data = request.get_json(force=True)
-  print(data)
-  # data =  json.load(data)
   power_state = data["power_state"]
   fan_state = data["fan_state"]
   pm1 = data["pm1"]
@@ -139,7 +137,6 @@ def senddata():
 
 @app.route('/stuff', methods = ['GET']) # 실시간 데이터 반환, GET요청만 허용
 def stuff():
-  print(state)
   try:
     return jsonify(data)
   except:
