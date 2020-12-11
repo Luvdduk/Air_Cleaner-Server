@@ -9,7 +9,7 @@ import json
 #Flask 객체 인스턴스 생성
 app = Flask(__name__)
 
-state = {
+state = { # 명령 전달 변수
   "power_on" : False,
   "power_off" : False,
   "auto_mode" : False,
@@ -17,12 +17,12 @@ state = {
   "fan_mid" : False,
   "fan_full" : False
 }
+# 상태 변수
 power_state = 0
 fan_state = 0
 pm1 = 0
 pm25 = 0
 pm10 = 0
-
 
 
 @app.route('/') # index.html 렌더링
@@ -104,17 +104,20 @@ def days_graph():
 
 
 
-
+# 라즈베리 파이로부터 상태 변수 수신
 @app.route('/receivedata', methods = ['GET', 'POST'])
 def receivedata():
   global data, power_state, fan_state, pm1, pm25, pm10
-  data = request.get_json(force=True)
+  data = request.get_json(force=True) # json 형태로 변경
+  print(data)
+  # 받은 데이터 변수에 저장
   power_state = data["power_state"]
   fan_state = data["fan_state"]
   pm1 = data["pm1"]
   pm25 = data["pm25"]
   pm10 = data["pm10"]
 
+  # 명령변수 명령 전달 확인시 False로 변경
   if (state["power_on"] == True) & (power_state == 1):
     state["power_on"] = False
   if (state["power_off"] == True) & (power_state == 0):
@@ -129,16 +132,16 @@ def receivedata():
     state["fan_full"] = False
   return ("data received")
 
-@app.route('/senddata', methods = ['GET', 'POST'])
+@app.route('/senddata', methods = ['GET', 'POST']) # 라즈베리파이에 명령 전달
 def senddata():
   global state
-  return jsonify(state)
+  return jsonify(state) # json 타입으로 변환하여 리턴
 
 
 @app.route('/stuff', methods = ['GET']) # 실시간 데이터 반환, GET요청만 허용
 def stuff():
   try:
-    return jsonify(data)
+    return jsonify(data) # json 타입으로 변환하여 리턴
   except:
     return ("no data")
 

@@ -1,5 +1,3 @@
-/*index.html*/
-/*전원버튼*/
 a{
   text-decoration: none;
 }
@@ -25,7 +23,7 @@ ul {
   padding: 0;
   list-style-type: none;
 }
-
+/*네비 바*/
 nav {
   background-color: #95c6e6;
   height: 65px;
@@ -34,7 +32,6 @@ nav {
   margin-top: -65px;
   z-index: 10;
 }
-
 
 #menuToggle {
   display: inline-block;
@@ -128,13 +125,12 @@ nav {
 {
   transform: none;
 }
+/*네비 바 end*/
 
+/*로고*/
 .logo{
   color: white;
-  /* text-align: center; */
   display: inline;
-  /* font-size: 30pt;
-  font-weight: 530; */
 }
 
 .logo-box{
@@ -146,6 +142,7 @@ nav {
   width: auto;
   height: auto;
 }
+/*로고 end*/
 
 div.qw{
   width: 300px;
@@ -156,14 +153,11 @@ div.qw{
   border-radius: 5px;
 }
 
+/*메인컨텐츠 여백*/
 main{
   margin-top: 65px;
-  /* position: relative; */
 }
 
-a{
-  text-decoration: none;
-}
 
 .dust{
   width: 100%;
@@ -173,6 +167,7 @@ a{
   transition: color 1s;
 }
 
+/*먼지 데이터*/
 #dustvalue{
   height: auto;
   display: inline-block;
@@ -188,6 +183,7 @@ a{
   text-align: center;
 }
 
+/*스위치*/
 .sw{
   display: flex;
   padding-top: 15px;
@@ -204,6 +200,7 @@ a{
   float: left;
   
 }
+
 
 #dustname{
   font-size: 15pt;
@@ -291,7 +288,9 @@ input[type="checkbox"] {
 .input__on-off:checked + .label__on-off .marble {
     left: 40px;
 }
+/*스위치 end*/
 
+/*이모티콘*/
 .fa-smile{
   display: none;
   font-size: 30pt;
@@ -317,6 +316,7 @@ input[type="checkbox"] {
   font-size: 30pt;
   color: red;
 }
+/*이모티콘end*/
 
 .fanspeed{
   font-size: 20pt;

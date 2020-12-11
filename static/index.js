@@ -24,25 +24,22 @@ function modeauto(){ // 자동모드
         return false;
 }
 
-function fanslow(){ // 팬속도 30%
+function fanslow(){ //팬 속도 65%
     $.getJSON('/fanslow',
             function(data) {
-        }); // /fanslow 경로에 GET요청
-        history.back(); //뒤로가기
-        return false;
+        }); // /fanmid 경로에 GET요청
+    return false;
 }
 function fanmid(){ //팬 속도 65%
     $.getJSON('/fanmid',
             function(data) {
         }); // /fanmid 경로에 GET요청
-    history.back(); //뒤로가기
     return false;
 }
 function fanfull(){ //팬 속도 100%
     $.getJSON('/fanfull',
             function(data) {
         }); // /fanfull 경로에 GET요청
-        history.back();//뒤로가기
     return false;
 }
 
@@ -51,11 +48,6 @@ let intervalID= setInterval(update_dust, 1000); //1초마다 update_dust() 함�
 function update_dust() {
     $.getJSON('/stuff', //ajax로 실시간 미세먼지값 수신
     function (data) {
-    if (data = NaN){
-        alert("공기청정기과 연결되지 않았습니다. 공기청정기의 전원을 연결하고 새로고침하세요.")
-    }
-
-    console.log("ㅇㅇ");
     console.log(data);
     //변수에 실시간 데이터값 저장(int)
     pm1= Number(data.pm1);
@@ -81,7 +73,7 @@ function update_dust() {
         $('#fan_speed').text("Error");
         console.log("풍량표시 오류")
     }
-
+    
     //미세먼지 이모티콘 및 색 변화
     if((pm10 <= 30) && ((pm25 + pm1) <= 15)){ //좋음
         $("#duststate").css("color", "#a3e7d6");
