@@ -3,8 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>공기청정기 정보</title>
-        <link rel="stylesheet" href="{{url_for('static',filename='index.css')}}">
+        <title>공기청정기 정보</title><!-- 제목 -->
+        <link rel="stylesheet" href="{{url_for('static',filename='index.css')}}"><!-- 전체 css -->
+        <link rel="stylesheet" href="{{url_for('static',filename='info.css')}}"><!-- 버튼 css -->
         <script src="https://kit.fontawesome.com/e08131f43f.js" crossorigin="anonymous"></script>
     </head>
 
@@ -27,9 +28,9 @@
             </nav>
         </div>
         
-        <main class="main-content" style="margin-left: 20px; margin-right: 20px; padding-top: 10px;">
+        <main class="main-content" style="margin-left: 20px; margin-right: 20px; padding-top: 10px;"><!-- 메인 콘텐츠 -->
             <div style="text-align: center;">
-                <img src="/static/pic/동미대_마크.png" width="100%" style="margin-bottom: 10px;" alt="">
+                <img src="/static/pic/동미대_마크.png" width="100%" style="margin-bottom: 10px;" alt=""><!-- 학교로고 -->
             </div>
             <h2>조원</h2>
             <div style="font-size: 20px;">이름: 진미강, 학번: 20184902</div>
@@ -37,8 +38,8 @@
             <h2>작품 소개</h2>
             <div style="margin: 10px 0px; font-size: 12pt; text-align: justify;">　기존 공기청정기가 가진 기능인 스위치를 이용해 공기청정기의 동작을 제어하고, 미세먼지 센서의 측정값을 LCD로 표시해주는 기능과, 이에 더해 애플리케이션을 통해 실시간 미세먼지 값을 모니터링하고, 최근 24시간, 7주일 단위로 미세먼지 변화를 알 수 있는 그래프를 확인할 수 있는 기능과 가정 또는 외부에서도 공기청정기의 동작을 제어할수 있는 IOT기능, 그리고 먼지센서 농도에 따라 팬 속도를 제어하는 자동모드 기능을 라즈베리파이를 이용해 파이썬으로 구현하였습니다. 애플리케이션은 파이썬 웹서버(flask)와 연동하여, HTML, CSS, JS를 이용해 웹과 서버 간 통신 및 DB데이터 처리를 구현하였습니다</div>
             <iframe width="100%" height="200px" src="https://www.youtube.com/embed/ceI64_MZTFY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <a href="/static/pdf,ppt/졸업작품 3차 발표-최종.pptx" style="text-align: center;"><h3 style="color: rgb(0, 0, 0);background-color: rgb(90, 247, 197);padding: 15px 0px; border-radius: 30px; margin: 20px 0px;">3차 발표자료 PPT</h3></a>
-            <a href="/static/pdf,ppt/졸업작품_최종_보고서.pdf" style="text-align: center;"><h3 style="color: rgb(0, 0, 0);background-color: rgb(252, 203, 67);padding: 15px 0px; border-radius: 30px; margin: 20px 0px;">최종 보고서 PDF</h3></a>
+            <a href="/static/pdf,ppt/졸업작품 3차 발표-최종.pptx" style="text-align: center;"><button id="bt1"><i class="far fa-file-powerpoint" style="margin-right: 10px;"></i> 3차 발표자료 PPT</button></a><!-- ppt 다운로드 버튼 -->
+            <a href="/static/pdf,ppt/졸업작품_최종_보고서.pdf" style="text-align: center;"><button id="bt2"><i class="far fa-file-pdf" style="margin-right: 10px;"></i> 최종 보고서 PDF</button></a><!-- pdf 다운로드 버튼 -->
         </main>
     </body>
 </html>
